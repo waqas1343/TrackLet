@@ -1,55 +1,99 @@
 import 'package:flutter/material.dart';
+import 'package:tracklet/core/constants/colors/app_colors.dart';
+
+// Default selection index = 0 rakha (pehla card select hoga app open hote hi)
+final ValueNotifier<int> selectedCylinderIndex = ValueNotifier<int>(0);
 
 class CylinderBox extends StatelessWidget {
+  final int index;
   final String title;
-  final String count;
-  final Color bgColor;
-  final Color titleColor;
-  final Color countColor;
+  final String subtitle;
+  final String value;
+  final Color? backgroundColor;
+  final Color textColor;
+  final Color? borderColor;
 
   const CylinderBox({
     super.key,
+    required this.index,
     required this.title,
-    required this.count,
-    required this.bgColor,
-    required this.titleColor,
-    required this.countColor,
+    required this.subtitle,
+    required this.value,
+    this.backgroundColor,
+    required this.textColor,
+    this.borderColor,
   });
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: Container(
-        height: 100,
-        padding: const EdgeInsets.all(12),
-        decoration: BoxDecoration(
-          color: bgColor,
-          borderRadius: BorderRadius.circular(8),
-          border: Border.all(color: const Color(0xFFE0E0E0)),
-        ),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween, 
-          children: [
-            Text(
-              title,
-              style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w400,
-                  height: 1.4,
-                  color: titleColor, 
+      child: ValueListenableBuilder<int>(
+        valueListenable: selectedCylinderIndex,
+        builder: (context, selectedIndex, child) {
+          Color cardColor = selectedIndex == index
+              ? AppColors.darkBlue
+              : (backgroundColor ?? AppColors.white);
+
+          Color cardTextColor =
+              selectedIndex == index ? AppColors.white : textColor;
+
+          Color cardBorderColor = selectedIndex == index
+              ? AppColors.darkBlue
+              : (borderColor ?? AppColors.darkGray);
+
+          return GestureDetector(
+            onTap: () => selectedCylinderIndex.value = index,
+            child: Container(
+              decoration: BoxDecoration(
+                color: cardColor,
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(
+                  color: cardBorderColor,
+                  width: 1,
+                ),
+              ),
+              padding: const EdgeInsets.all(16),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          title,
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyLarge
+                              ?.copyWith(color: cardTextColor),
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          subtitle,
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyMedium
+                              ?.copyWith(color: cardTextColor),
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ],
+                    ),
+                  ),
+                  Text(
+                    value,
+                    style: TextStyle(
+                      color: cardTextColor,
+                      fontSize: 30,
+                      fontWeight: FontWeight.w400,
+                    ),
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ],
               ),
             ),
-            Text(
-              count,
-              style: TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.w400,
-                  color: countColor, 
-              ),
-            ),
-          ],
-        ),
+          );
+        },
       ),
     );
   }

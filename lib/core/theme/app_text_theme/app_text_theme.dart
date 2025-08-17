@@ -9,8 +9,8 @@ class AppTextTheme {
     textTheme: TextTheme(
       displayLarge: TextStyle(fontSize: 32, color: AppColors.lightPrimary),
       displayMedium: TextStyle(
-        fontSize: 28,
-        fontWeight: FontWeight.w500,
+        fontSize: 30,
+        fontWeight: FontWeight.w400,
         color: AppColors.black,
       ),
       displaySmall: TextStyle(

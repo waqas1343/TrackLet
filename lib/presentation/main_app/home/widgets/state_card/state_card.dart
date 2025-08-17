@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:tracklet/core/constants/colors/app_colors.dart';
-import 'package:tracklet/logic/controllers/select_card_provider/select_card_provider.dart';
+
+final ValueNotifier<int> selectedCardIndex = ValueNotifier<int>(0);
 
 class StatCard extends StatelessWidget {
   final int index;
@@ -10,7 +10,7 @@ class StatCard extends StatelessWidget {
   final String value;
   final Color? backgroundColor;
   final Color textColor;
-  final Color? borderColor; // optional border color
+  final Color? borderColor;
 
   const StatCard({
     super.key,
@@ -25,23 +25,23 @@ class StatCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<SelectedCardProvider>(
-      builder: (context, selectedCard, child) {
-        Color cardColor = selectedCard.selectedIndex == index
-            ? AppColors.darkBlue
-            : (backgroundColor ?? AppColors.white);
+    return Expanded(
+      child: ValueListenableBuilder<int>(
+        valueListenable: selectedCardIndex,
+        builder: (context, selectedIndex, child) {
+          Color cardColor = selectedIndex == index
+              ? AppColors.darkBlue
+              : (backgroundColor ?? AppColors.white);
 
-        Color cardTextColor = selectedCard.selectedIndex == index
-            ? AppColors.white
-            : textColor;
+          Color cardTextColor =
+              selectedIndex == index ? AppColors.white : textColor;
 
-        Color cardBorderColor = selectedCard.selectedIndex == index
-            ? AppColors.darkBlue 
-            : (borderColor ?? AppColors.darkGray); 
+          Color cardBorderColor = selectedIndex == index
+              ? AppColors.darkBlue
+              : (borderColor ?? AppColors.darkGray);
 
-        return Expanded(
-          child: GestureDetector(
-            onTap: () => selectedCard.selectCard(index),
+          return GestureDetector(
+            onTap: () => selectedCardIndex.value = index,
             child: Container(
               decoration: BoxDecoration(
                 color: cardColor,
@@ -52,50 +52,48 @@ class StatCard extends StatelessWidget {
                 ),
               ),
               padding: const EdgeInsets.all(16),
-              child: Column(
+              child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
                 children: [
-                  Flexible(
-                    child: Text(
-                      title,
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyLarge
-                          ?.copyWith(color: cardTextColor),
-                      overflow: TextOverflow.ellipsis,
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          title,
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyLarge
+                              ?.copyWith(color: cardTextColor),
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          subtitle,
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyMedium
+                              ?.copyWith(color: cardTextColor),
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ],
                     ),
                   ),
-                  const SizedBox(height: 4),
-                  Flexible(
-                    child: Text(
-                      subtitle,
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyMedium
-                          ?.copyWith(color: cardTextColor),
-                      overflow: TextOverflow.ellipsis,
+                  Text(
+                    value,
+                    style: TextStyle(
+                      color: cardTextColor,
+                      fontSize: 30,
+                      fontWeight: FontWeight.w400,
                     ),
-                  ),
-                  const SizedBox(height: 8),
-                  Flexible(
-                    child: Text(
-                      value,
-                      style: TextStyle(
-                        color: cardTextColor,
-                        fontSize: 30,
-                        fontWeight: FontWeight.w400,
-                      ),
-                      overflow: TextOverflow.ellipsis,
-                    ),
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ],
               ),
             ),
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 }

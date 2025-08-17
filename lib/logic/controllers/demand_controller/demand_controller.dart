@@ -2,34 +2,28 @@ import 'package:flutter/material.dart';
 import 'package:tracklet/data/model/demand_model/demand_model.dart';
 
 class DemandProvider with ChangeNotifier {
-  // Stock & Empty Cylinder Data
   int stockCylinders = 40;
   int emptyCylinders = 15;
 
-  // Swipe Button Arrow State
   bool iconOnRight = false;
   double _iconAlignmentX = -1; 
   double get iconAlignmentX => _iconAlignmentX;
 
-  // Update swipe icon position
   void updateIconPosition(double value) {
     _iconAlignmentX = value.clamp(-1.0, 1.0);
     notifyListeners();
   }
 
-  // Reset swipe icon to left
   void resetIconPosition() {
     _iconAlignmentX = -1;
     notifyListeners();
   }
 
-  // Toggle icon side
   void toggleIconPosition(bool toRight) {
     iconOnRight = toRight;
     notifyListeners();
   }
 
-  // Demand Requests Data
   final List<DemandCardModel> _demandList = [
     DemandCardModel(
       shopName: "Shop 01",
@@ -41,7 +35,7 @@ class DemandProvider with ChangeNotifier {
         ItemModel(weight: "50 KG", quantity: 3),
         ItemModel(weight: "80 KG", quantity: 5),
       ],
-      status: "Delivered", // New field for status badge
+      status: "Delivered",
       orderHistory: [
         OrderModel(sno: "01", cylNo: "201", date: "04/02", driver: "Majid", dispatch: "50 KG (3)"),
         OrderModel(sno: "02", cylNo: "202", date: "05/02", driver: "Ali", dispatch: "30 KG (2)"),
@@ -65,6 +59,5 @@ class DemandProvider with ChangeNotifier {
     ),
   ];
 
-  // Getter
   List<DemandCardModel> get demandList => _demandList;
 }

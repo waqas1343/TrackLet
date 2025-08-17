@@ -5,18 +5,48 @@ import 'package:tracklet/presentation/main_app/stock/widgets/table_row_item/tabl
 class FilledTable extends StatelessWidget {
   const FilledTable({super.key});
 
-  Widget _buildTableHeader() {
+  Widget _buildTableHeader(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
       decoration: BoxDecoration(
-        color: AppColors.darkBlue,
+        color: AppColors.mediumBlue,
         borderRadius: BorderRadius.circular(6),
       ),
-      child: const Row(
+      child: Row(
         children: [
-          Expanded(flex: 1, child: Text('S.no', style: TextStyle(fontWeight: FontWeight.w500,color: AppColors.darkBlue,fontSize: 16))),
-          Expanded(flex: 2, child: Text('Cyl.no', style: TextStyle(fontWeight: FontWeight.w500,color: AppColors.darkBlue,fontSize: 16))),
-          Expanded(flex: 1, child: Text('Weight', style: TextStyle(fontWeight: FontWeight.w500,color: AppColors.darkBlue,fontSize: 16))),
+          Expanded(
+            flex: 1,
+            child: Text(
+              'S.no',
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.darkBlue,
+                    fontSize: 16,
+                  ),
+            ),
+          ),
+          Expanded(
+            flex: 2,
+            child: Text(
+              'Cyl.no',
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.darkBlue,
+                    fontSize: 16,
+                  ),
+            ),
+          ),
+          Expanded(
+            flex: 1,
+            child: Text(
+              'Weight',
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.darkBlue,
+                    fontSize: 16,
+                  ),
+            ),
+          ),
         ],
       ),
     );
@@ -46,9 +76,13 @@ class FilledTable extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
+          Text(
             'Filled Cylinder',
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500,color: AppColors.darkBlue),
+            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 16,
+                  color: AppColors.darkBlue,
+                ),
           ),
           const SizedBox(height: 12),
           SizedBox(
@@ -67,7 +101,7 @@ class FilledTable extends StatelessWidget {
                   itemCount: rows.length + 1,
                   itemBuilder: (context, index) {
                     if (index == 0) {
-                      return _buildTableHeader();
+                      return _buildTableHeader(context);
                     } else {
                       return rows[index - 1];
                     }

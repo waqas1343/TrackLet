@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:tracklet/core/constants/colors/app_colors.dart';
+import 'package:provider/provider.dart';
 import 'package:tracklet/core/widgets/custom_text/custom_text.dart';
+import 'package:tracklet/logic/controllers/demand_controller/demand_controller.dart';
 import 'package:tracklet/presentation/main_app/stock/widgets/cylinder_box/cylinder_box.dart';
 import 'package:tracklet/presentation/main_app/stock/widgets/empty_filled_buttons/empty_filled_buttons.dart';
 import 'package:tracklet/presentation/main_app/stock/widgets/filled_table/filled_table.dart';
@@ -11,6 +12,8 @@ class Stock extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final provider = context.watch<DemandProvider>();
+
     return Scaffold(
       appBar: CustomAppBar(name: "Bilal Ahmed", initials: "BA"),
       body: SingleChildScrollView(
@@ -21,14 +24,27 @@ class Stock extends StatelessWidget {
             CustomText(text: 'All Stock',style: Theme.of(context).textTheme.titleLarge,),
             const SizedBox(height: 20),
             Row(
-              children: const [
-                CylinderBox(title: 'Cylinder\nin stocks', count: '48', bgColor: AppColors.darkBlue, titleColor: AppColors.darkBlue, countColor: AppColors.darkBlue,),
-                SizedBox(width: 12),
-                CylinderBox(title: 'Empty\nCylinder', count: '30', bgColor:AppColors.darkBlue, titleColor: AppColors.darkBlue, countColor: AppColors.darkBlue,),
+              children: [
+               CylinderBox(
+                  index: 0,
+                  title: "Cylinder",
+                  subtitle: "in stocks",
+                  value: "${provider.stockCylinders}",
+                  textColor: Colors.black,
+                ),
+                const SizedBox(width: 12),
+                CylinderBox(
+                  index: 1000,
+                  title: "Empty",
+                  subtitle: "Cylinder",
+                  value: "${provider.emptyCylinders}",
+                  textColor: Colors.black,
+                ),
+                
               ],
             ),
             const SizedBox(height: 24),
-            const EmptyFilledButtons(),
+             EmptyFilledButtons(),
             const SizedBox(height: 24),
             const FilledTable(),
           ],
