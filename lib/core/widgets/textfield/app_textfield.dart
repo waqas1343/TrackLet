@@ -15,16 +15,18 @@ class AppTextFields {
     EdgeInsetsGeometry? contentPadding,
     required FormFieldValidator<String>? validator,
     String? errorText,
+    required Function(String value) onChanged, 
   }) {
     return TextFormField(
       controller: controller,
       obscureText: obscureText,
       keyboardType: keyboardType,
       style: const TextStyle(color: Colors.black),
+      onChanged: onChanged, 
       decoration: InputDecoration(
-        errorText: errorText, // 👈 Ye add kiya
+        errorText: errorText,
         errorStyle: const TextStyle(
-          color: Colors.red, // Red color rakha
+          color: Colors.red,
           fontSize: 14,
         ),
         hintText: hintText,
@@ -33,8 +35,7 @@ class AppTextFields {
         filled: true,
         fillColor: fillColor ?? Colors.white,
         hintStyle: const TextStyle(color: Colors.grey, fontSize: 14),
-        contentPadding:
-            contentPadding ??
+        contentPadding: contentPadding ??
             const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(borderRadius),

@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:tracklet/core/theme/app_text_theme/app_text_theme.dart';
 import 'package:tracklet/logic/multi_providers/multi_providers.dart';
 import 'package:tracklet/presentation/main_app/bottom_nav_bar/bottom_nav_bar.dart';
+import 'package:tracklet/presentation/main_app/chat/chat_screen/chat_screen.dart';
 
 void main() {
   runApp(const TrackLet());

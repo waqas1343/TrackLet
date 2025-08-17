@@ -64,7 +64,7 @@ class LoginScreen extends StatelessWidget {
                           hintText: 'Enter your email',
                           controller: emailController,
                           errorText: validation.emailError,
-                          validator: (_) => validation.emailError,
+                          validator: (_) => validation.emailError, onChanged: (value) {  },
                         ),
                         const SizedBox(height: 10),
 
@@ -79,7 +79,7 @@ class LoginScreen extends StatelessWidget {
                           controller: passwordController,
                           obscureText: true,
                           errorText: validation.passwordError,
-                          validator: (_) => validation.passwordError,
+                          validator: (_) => validation.passwordError, onChanged: (value) {  },
                         ),
 
                         Row(
