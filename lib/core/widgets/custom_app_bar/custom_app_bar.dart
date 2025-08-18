@@ -6,15 +6,17 @@ import 'package:tracklet/presentation/main_app/notification/notification/notific
 import 'package:tracklet/presentation/main_app/setting_screen/setting_screen/seting_screen.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-  final String name;
-  final String initials;
+  final String? name;
+  final String? initials;
+  final String? centerTitle; 
   final VoidCallback? onChatTap;
   final VoidCallback? onNotificationTap;
 
   const CustomAppBar({
     super.key,
-    required this.name,
-    required this.initials,
+    this.name,
+    this.initials,
+    this.centerTitle,
     this.onChatTap,
     this.onNotificationTap,
   });
@@ -25,28 +27,33 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       automaticallyImplyLeading: false,
       elevation: 0,
       backgroundColor: Colors.white,
-      title: Row(
-        children: [
-          GestureDetector(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => SettingScreen()),
-              );
-            },
-            child: CircleAvatar(
-              backgroundColor: AppColors.darkBlue,
-              child: Text(
-                initials,
-                style: const TextStyle(color: Colors.white, fontSize: 16),
-              ),
+      centerTitle: true,
+      title: Text(
+        centerTitle ?? "",
+        style: const TextStyle(
+          color: Colors.black,
+          fontSize: 16,
+          fontWeight: FontWeight.w600,
+        ),
+      ),
+      leading: GestureDetector(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => SettingScreen()),
+          );
+        },
+        child: Padding(
+          padding: const EdgeInsets.only(left: 8),
+          child: CircleAvatar(
+            backgroundColor: AppColors.darkBlue,
+            child: Text(
+              initials ?? "",
+              style: const TextStyle(color: Colors.white, fontSize: 16),
             ),
           ),
-          const SizedBox(width: 10),
-          Text(name, style: const TextStyle(color: Colors.black, fontSize: 14)),
-        ],
+        ),
       ),
-
       actions: [
         GestureDetector(
           onTap:

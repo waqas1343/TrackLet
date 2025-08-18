@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tracklet/core/widgets/custom_app_bar/custom_app_bar.dart';
+import 'package:tracklet/core/widgets/custom_text/custom_text.dart';
 
 class NotificationItem {
   final String id;
@@ -16,18 +16,52 @@ class NotificationItem {
 }
 
 class NotificationScreen extends StatelessWidget {
-  
   final List<NotificationItem> notifications = [
-    NotificationItem(id: 'S1', shop: 'Shop 01', message: 'New stock Request', time: '24 mins ago'),
-    NotificationItem(id: 'S2', shop: 'Shop 02', message: 'Inventory check', time: '1 hour ago'),
-    NotificationItem(id: 'S3', shop: 'Shop 03', message: 'Sale promotion', time: '2 hours ago'),
-    NotificationItem(id: 'S4', shop: 'Shop 04', message: 'Restock notification', time: '3 hours ago'),
-    NotificationItem(id: 'S5', shop: 'Shop 05', message: 'Order update', time: '4 hours ago'),
-    NotificationItem(id: 'S6', shop: 'Shop 06', message: 'New arrival alert', time: '5 hours ago'),
-    NotificationItem(id: 'S7', shop: 'Shop 07', message: 'Feedback request', time: '6 hours ago'),
+    NotificationItem(
+      id: 'S1',
+      shop: 'Shop 01',
+      message: 'New stock Request',
+      time: '24 mins ago',
+    ),
+    NotificationItem(
+      id: 'S2',
+      shop: 'Shop 02',
+      message: 'Inventory check',
+      time: '1 hour ago',
+    ),
+    NotificationItem(
+      id: 'S3',
+      shop: 'Shop 03',
+      message: 'Sale promotion',
+      time: '2 hours ago',
+    ),
+    NotificationItem(
+      id: 'S4',
+      shop: 'Shop 04',
+      message: 'Restock notification',
+      time: '3 hours ago',
+    ),
+    NotificationItem(
+      id: 'S5',
+      shop: 'Shop 05',
+      message: 'Order update',
+      time: '4 hours ago',
+    ),
+    NotificationItem(
+      id: 'S6',
+      shop: 'Shop 06',
+      message: 'New arrival alert',
+      time: '5 hours ago',
+    ),
+    NotificationItem(
+      id: 'S7',
+      shop: 'Shop 07',
+      message: 'Feedback request',
+      time: '6 hours ago',
+    ),
   ];
 
-   NotificationScreen({super.key});
+  NotificationScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +69,13 @@ class NotificationScreen extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: CustomAppBar(name: "Bilal Ahmed", initials: "BA"),
+      appBar: AppBar(
+        title: CustomText(
+          text: "Notification",
+          style: Theme.of(context).textTheme.displaySmall,
+        ),
+        centerTitle: true,
+      ),
       body: ListView.separated(
         padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         itemCount: notifications.length,
@@ -55,8 +95,11 @@ class NotificationScreen extends StatelessWidget {
                   backgroundColor: darkBlue,
                   radius: 20,
                   child: Text(
-                    item.id, 
-                    style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
+                    item.id,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                 ),
                 SizedBox(width: 12),
@@ -64,7 +107,13 @@ class NotificationScreen extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(item.shop, style: TextStyle(fontWeight: FontWeight.w600, fontSize: 15)),
+                      Text(
+                        item.shop,
+                        style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 15,
+                        ),
+                      ),
                       SizedBox(height: 4),
                       Text(
                         item.message,
