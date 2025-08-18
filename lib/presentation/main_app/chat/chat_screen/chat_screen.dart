@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tracklet/core/constants/colors/app_colors.dart';
 import 'package:tracklet/core/widgets/custom_app_bar/custom_app_bar.dart';
+import 'package:tracklet/core/widgets/custom_text/custom_text.dart';
 import 'package:tracklet/core/widgets/textfield/app_textfield.dart';
 import 'package:tracklet/presentation/main_app/chat/chat_screen/widgets/chating_screen/chating_screen.dart';
 
@@ -31,7 +32,13 @@ class ChatScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(name: "Bilal Ahmed", initials: "BA"),
+      appBar: AppBar(
+        title: CustomText(
+          text: "Messeges",
+          style: Theme.of(context).textTheme.displaySmall,
+        ),
+        centerTitle: true,
+      ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         child: Column(
@@ -42,7 +49,7 @@ class ChatScreen extends StatelessWidget {
                 hintText: 'Search',
                 controller: searchController,
                 onChanged: (value) {
-                  searchQuery.value = value.toLowerCase(); 
+                  searchQuery.value = value.toLowerCase();
                 },
                 validator: (value) {
                   return null;
@@ -63,8 +70,7 @@ class ChatScreen extends StatelessWidget {
 
                   return ListView.separated(
                     itemCount: filteredChats.length,
-                    separatorBuilder: (context, index) =>
-                        SizedBox(height: 8),
+                    separatorBuilder: (context, index) => SizedBox(height: 8),
                     itemBuilder: (context, index) {
                       final chat = filteredChats[index];
                       return InkWell(
@@ -94,8 +100,7 @@ class ChatScreen extends StatelessWidget {
                               SizedBox(width: 12),
                               Expanded(
                                 child: Column(
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
                                       chat.name,
@@ -146,8 +151,7 @@ class ChatScreen extends StatelessWidget {
                                       height: 20,
                                       decoration: BoxDecoration(
                                         color: Colors.blue,
-                                        borderRadius:
-                                            BorderRadius.circular(10),
+                                        borderRadius: BorderRadius.circular(10),
                                       ),
                                       child: Center(
                                         child: Text(

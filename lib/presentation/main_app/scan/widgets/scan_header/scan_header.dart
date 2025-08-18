@@ -50,7 +50,7 @@ class ScanHeader extends StatelessWidget {
     final titleColor = isSelected ? AppColors.white : AppColors.black;
     final countColor = isSelected ? AppColors.white : AppColors.black;
     final viewDetailsColor = isSelected ? AppColors.white : AppColors.black;
-    final borderColor = isSelected ? AppColors.darkBlue : Colors.grey.shade400; // Added border color
+    final borderColor = isSelected ? AppColors.darkBlue : Colors.grey.shade400;
 
     return InkWell(
       onTap: onTap,
@@ -60,7 +60,7 @@ class ScanHeader extends StatelessWidget {
         decoration: BoxDecoration(
           color: bgColor,
           borderRadius: BorderRadius.circular(6),
-          border: Border.all(color: borderColor), // border added
+          border: Border.all(color: borderColor),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

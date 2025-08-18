@@ -8,7 +8,6 @@ import 'package:tracklet/presentation/main_app/setting_screen/setting_screen/set
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String? name;
   final String? initials;
-  final String? centerTitle; 
   final VoidCallback? onChatTap;
   final VoidCallback? onNotificationTap;
 
@@ -16,7 +15,6 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     super.key,
     this.name,
     this.initials,
-    this.centerTitle,
     this.onChatTap,
     this.onNotificationTap,
   });
@@ -27,33 +25,32 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       automaticallyImplyLeading: false,
       elevation: 0,
       backgroundColor: Colors.white,
-      centerTitle: true,
-      title: Text(
-        centerTitle ?? "",
-        style: const TextStyle(
-          color: Colors.black,
-          fontSize: 16,
-          fontWeight: FontWeight.w600,
-        ),
-      ),
-      leading: GestureDetector(
+      title: GestureDetector(
         onTap: () {
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => SettingScreen()),
           );
         },
-        child: Padding(
-          padding: const EdgeInsets.only(left: 8),
-          child: CircleAvatar(
-            backgroundColor: AppColors.darkBlue,
-            child: Text(
-              initials ?? "",
-              style: const TextStyle(color: Colors.white, fontSize: 16),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            CircleAvatar(
+              backgroundColor: AppColors.darkBlue,
+              child: Text(
+                initials ?? "",
+                style: const TextStyle(color: Colors.white, fontSize: 16),
+              ),
             ),
-          ),
+            const SizedBox(width: 10),
+            Text(
+              name!,
+              style: const TextStyle(color: Colors.black, fontSize: 14),
+            ),
+          ],
         ),
       ),
+
       actions: [
         GestureDetector(
           onTap:
@@ -68,7 +65,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             height: 45,
             width: 45,
             decoration: BoxDecoration(
-              border: Border.all(width: 0.2),
+              border: Border.all(width: 0.1),
               borderRadius: const BorderRadius.all(Radius.circular(50)),
             ),
             child: Center(

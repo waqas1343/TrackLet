@@ -5,6 +5,7 @@ import 'package:tracklet/presentation/main_app/home/widgets/section_header/secti
 import 'package:tracklet/presentation/main_app/home/widgets/state_card/state_card.dart';
 import 'package:tracklet/core/widgets/custom_app_bar/custom_app_bar.dart';
 import 'package:tracklet/presentation/main_app/home/widgets/demand_cards/demand_card.dart';
+
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
@@ -13,7 +14,6 @@ class HomeScreen extends StatelessWidget {
     final provider = context.watch<DemandProvider>();
 
     return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: const CustomAppBar(name: 'Bilal Ahmed', initials: "BA"),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
